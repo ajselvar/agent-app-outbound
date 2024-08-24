@@ -4,38 +4,43 @@ import  "amazon-connect-streams";
 
 function App() {
 
+  const connectUrl = "https://ajselvar-workshop.awsapps.com/connect";
+
   useEffect(() => {
     const container = document.getElementById("ccp");
     // eslint-disable-next-line no-undef
-    connect.core.initCCP(container, {
-      ccpUrl: "https://ajselvar-workshop.awsapps.com/connect/ccp-v2",
-      region: 'us-east-1',
-      loginPopup: true,
-      loginPopupAutoClose: true,
-      softphone: {
-        allowFramedSoftphone: true,
-        allowFramedVideoCall: true,    // optional, default to false
-        allowEarlyGum: true
-      },
-      pageOptions: { //optional
-        enableAudioDeviceSettings: true, //optional, defaults to 'false'
-        enableVideoDeviceSettings: true, //optional, defaults to 'false'
-        enablePhoneTypeSettings: true //optional, defaults to 'true' 
-      },
-      loginOptions: {                 // optional, if provided opens login in new window
-        autoClose: true,              // optional, defaults to `false`
-        height: 600,                  // optional, defaults to 578
-        width: 400,                   // optional, defaults to 433
-        top: 0,                       // optional, defaults to 0
-        left: 0                       // optional, defaults to 0
-      },
-    });
+    connect.agentApp.initApp(
+      "ccp",
+      "ccp-container",
+      connectUrl + "/ccp-v2/",
+      { style: "width:400px; height:600px;" }
+    );
+
+    // eslint-disable-next-line no-undef
+    connect.agentApp.initApp(
+      "customerprofiles",
+      "customerprofiles-container",
+      connectUrl + "/customerprofiles-v2/",
+      { style: "width:400px; height:600px;" }
+    );
+
+    // eslint-disable-next-line no-undef
+    connect.agentApp.initApp(
+      "wisdom",
+      "wisdom-container",
+      connectUrl + "/wisdom-v2/",
+      { style: "width:400px; height:600px;" }
+    );
   }, []);
 
   return (
     <div className="App">
       <header className="App-header">
-        <div id="ccp" style={{ width: "600px", height: "900px" }}></div>
+        <main style={{display: 'flex'}}>
+          <div id="ccp-container"></div>
+          <div id="customerprofiles-container"></div>
+          <div id="wisdom-container"></div>
+        </main>
       </header>
     </div>
   );
