@@ -35,7 +35,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div id="ccp" style={{ width: "320px", height: "500px" }}></div>
+        <div id="ccp" style={{ width: "600px", height: "900px" }}></div>
       </header>
     </div>
   );
